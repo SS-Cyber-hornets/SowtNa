@@ -8,7 +8,7 @@ Fname, Lname, Password, Email,image
 
 ### Artist
 
-Fname, Lname,Stage name, Password, Email,image, Bio, Label, Album_id, Group_id, Track_id,Image, phone number
+Fname, Lname,Stage name, Password, Email,image, Bio, Label_id, Album_id, Group_id, Track_id,Image, phone number, gender, begin 
 
 ### Listerner
 
@@ -16,14 +16,23 @@ Fname, Lname, Password, Email,image, Bio, phone number, playlist_id
 
 ## MUSIC
 
+### Gender
+
+name
 ### Track
 
-name, Album_id, Artist_id, Duration,Source, Cover, Fav_id, Category_id
+name, Album_id, Artist_id, Duration,Source, Cover, Fav_id, Category_id,discription, year, session_id, start_time,
 
+### Source
+
+source
 ### PLAYLIST
 
 Track_id, User_id, Artist_id, Name, Description
 
+### Playlist Track
+
+playlist_id, song_id,
 ### PLAYER
 
 Track_id, User_id, Artist_id
@@ -36,17 +45,20 @@ name
 
 name
 
+### Time
+
+started_time, hour, day,week, year, weekday
 ### Album
 
 Track_id, Artist_id, Cover, Duration
 
 ### Label
 
-Name, Bio, Album_id, Track_id, Artist_id, Category_id, group_id
+Name, Bio, Album_id, Track_id, Artist_id, group_id
 
 ### Group
 
-Name, Bio, Track_id, Artist_id, Category_id
+Name, Bio, Track_id, Artist_id
 
 ### Lyrics
 
@@ -88,4 +100,4 @@ User_id, Artist_id, counts
 
 ***Note: You can add,remove and update the models***
 
-> #### *Stephen* :smile
+> #### *Stephen*
