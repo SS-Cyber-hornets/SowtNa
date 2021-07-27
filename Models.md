@@ -8,7 +8,7 @@ Fname, Lname, Password, Email,image
 
 ### Artist
 
-Fname, Lname,Stage name, Password, Email,image, Bio, Label_id, Album_id, Group_id, Track_id,Image, phone number, gender, begin 
+Fname, Lname,Stage name, Password, Email,image, Bio, Label_id, Album_id, Group_id, Track_id,Image, phone number, gender, begin
 
 ### Listerner
 
@@ -33,7 +33,7 @@ Track_id, User_id, Artist_id, Name, Description
 ### Playlist Track
 
 playlist_id, song_id,
-### PLAYER
+### Player
 
 Track_id, User_id, Artist_id
 

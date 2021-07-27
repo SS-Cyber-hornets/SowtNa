@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GenderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tests', function () {
-    return 'Test';
-});
+// GENDER CONTROLLER
+Route::get('/genders', [GenderController::class, 'index']);
+Route::post('/genders', [GenderController::class, 'store']);
+Route::put('/gender/{gender}', [GenderController::class, 'update']);
+Route::get('/gender/{gender}', [GenderController::class, 'show']);
+// Route::delete('/gender/{gender}', [GenderController::class, 'destroy']);
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
