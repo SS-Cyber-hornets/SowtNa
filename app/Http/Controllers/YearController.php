@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChartTypeRequest;
-use App\Http\Resources\ChartTypeCollection;
-use App\Models\ChartType;
+use App\Http\Requests\YearRequest;
+use App\Http\Resources\YearCollection;
+use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class ChartTypeController extends Controller
+class YearController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class ChartTypeController extends Controller
      */
     public function index()
     {
-        return new ChartTypeCollection(ChartType::paginate());
+        return new YearCollection(Year::paginate());
     }
     /**
      * Store a newly created resource in storage.
@@ -25,11 +25,10 @@ class ChartTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ChartTypeRequest $request)
+    public function store(YearRequest $request)
     {
-
-        $chart_types = ChartType::create($request->all());
-        return $chart_types;
+        $years = Year::create($request->all());
+        return $years;
     }
 
     /**
@@ -38,9 +37,9 @@ class ChartTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ChartType $chart_type)
+    public function show(Year $year)
     {
-        return $chart_type;
+        return $year;
     }
 
     /**
@@ -50,11 +49,11 @@ class ChartTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ChartTypeRequest $request, $id)
+    public function update(YearRequest $request, $id)
     {
-        $chart_type = ChartType::find($id);
-        $chart_type->update($request->all());
-        return $chart_type;
+        $year = Year::find($id);
+        $year->update($request->all());
+        return $year;
     }
 
     /**
@@ -65,6 +64,6 @@ class ChartTypeController extends Controller
      */
     public function destroy($id)
     {
-        return ChartType::destroy($id);
+        return Year::destroy($id);
     }
 }

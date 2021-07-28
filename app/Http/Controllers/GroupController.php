@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChartTypeRequest;
-use App\Http\Resources\ChartTypeCollection;
-use App\Models\ChartType;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
-class ChartTypeController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,19 +13,18 @@ class ChartTypeController extends Controller
      */
     public function index()
     {
-        return new ChartTypeCollection(ChartType::paginate());
+        //
     }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ChartTypeRequest $request)
+    public function store(Request $request)
     {
-
-        $chart_types = ChartType::create($request->all());
-        return $chart_types;
+        //
     }
 
     /**
@@ -38,9 +33,9 @@ class ChartTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ChartType $chart_type)
+    public function show($id)
     {
-        return $chart_type;
+        //
     }
 
     /**
@@ -50,11 +45,9 @@ class ChartTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ChartTypeRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $chart_type = ChartType::find($id);
-        $chart_type->update($request->all());
-        return $chart_type;
+        //
     }
 
     /**
@@ -65,6 +58,6 @@ class ChartTypeController extends Controller
      */
     public function destroy($id)
     {
-        return ChartType::destroy($id);
+        //
     }
 }

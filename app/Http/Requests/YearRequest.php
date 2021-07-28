@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChartTypeRequest extends FormRequest
+class YearRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ChartTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|unique:chart-types',
+            'year' => 'required|unique:years',
         ];
     }
 }

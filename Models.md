@@ -21,7 +21,7 @@ Fname, Lname, Password, Email,image, Bio, phone number, playlist_id
 name
 ### Track
 
-name, Album_id, Artist_id, Duration,Source, Cover, Fav_id, Category_id,discription, year, session_id, start_time,
+name, Album_id, Artist_id, Duration,Source, Cover, Fav_id, Category_id,discription, year, session_id, start_time, view
 
 ### Source
 
@@ -54,11 +54,11 @@ Track_id, Artist_id, Cover, Duration
 
 ### Label
 
-Name, Bio, Album_id, Track_id, Artist_id, group_id
+Name, Bio, group_id
 
 ### Group
 
-Name, Bio, Track_id, Artist_id
+Name, Bio,year
 
 ### Lyrics
 
