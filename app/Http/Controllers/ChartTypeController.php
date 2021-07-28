@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChartTypeRequest;
+use App\Http\Resources\ChartTypeCollection;
+use App\Models\ChartType;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ChartTypeController extends Controller
 {
@@ -13,7 +17,7 @@ class ChartTypeController extends Controller
      */
     public function index()
     {
-        //
+        return new ChartTypeCollection(ChartType::paginate());
     }
     /**
      * Store a newly created resource in storage.
@@ -21,9 +25,11 @@ class ChartTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ChartTypeRequest $request)
     {
-        //
+
+        $chart_types = ChartType::create($request->all());
+        return $chart_types;
     }
 
     /**

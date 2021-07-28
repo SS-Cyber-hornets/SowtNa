@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GenderController;
@@ -16,11 +17,15 @@ use App\Http\Controllers\GenderController;
 */
 
 // GENDER CONTROLLER
-Route::get('/genders', [GenderController::class, 'index']);
-Route::post('/genders', [GenderController::class, 'store']);
-Route::put('/gender/{gender}', [GenderController::class, 'update']);
-Route::get('/gender/{gender}', [GenderController::class, 'show']);
-// Route::delete('/gender/{gender}', [GenderController::class, 'destroy']);
+Route::get('v1/genders', [GenderController::class, 'index']);
+Route::post('v1/genders', [GenderController::class, 'store']);
+Route::put('v1/gender/{gender}', [GenderController::class, 'update']);
+Route::get('v1/gender/{gender}', [GenderController::class, 'show']);
+Route::delete('/gender/{gender}', [GenderController::class, 'destroy']);
+
+// Chart Types
+Route::get('v1/chart-types', [ChartTypeController::class, 'index']);
+Route::post('v1/chart-types', [ChartTypeController::class, 'store']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

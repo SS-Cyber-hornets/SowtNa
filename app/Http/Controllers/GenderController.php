@@ -21,12 +21,10 @@ class GenderController extends Controller
         return new GenderCollection(Gender::paginate());
     }
 
-
     public function store(GenderRequest $request)
     {
-        // $this->validated();
         $gender = Gender::create($request->all());
-        return response()->json($gender, 201);
+        return $gender;
     }
 
     /**
