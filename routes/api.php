@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChartTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,13 @@ Route::post('v1/chart-types', [ChartTypeController::class, 'store']);
 Route::put('v1/chart-type/{chart_type}', [ChartTypeController::class, 'update']);
 Route::get('v1/chart-type/{chart_type}', [ChartTypeController::class, 'show']);
 Route::delete('v1/chart-type/{chart_type}', [ChartTypeController::class, 'destroy']);
+
+// CATEGORY TYPE ROUTES
+Route::get('v1/genres', [CategoryController::class, 'index']);
+Route::post('v1/genres', [CategoryController::class, 'store']);
+Route::put('v1/genre/{category}', [CategoryController::class, 'update']);
+Route::get('v1/genre/{category}', [CategoryController::class, 'show']);
+Route::delete('v1/genre/{category}', [CategoryController::class, 'destroy']);
 
 // YEAR ROUTES
 Route::get('v1/years', [YearController::class, 'index']);
