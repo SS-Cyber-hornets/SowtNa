@@ -30,14 +30,15 @@ class CategoryController extends Controller
         $input = $request->all();
 
         $category = Category::create($input);
+        $category->setStatus('active');
         $category = Category::find($category->id);
 
-        // Get image file  
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $category->addMediaFromRequest('image')->toMediaCollection('category');
         }
         return response()->json(['status' => 200, 'data' => $category]);
     }
+
     /**
      * Display the specified resource.
      *

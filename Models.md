@@ -98,6 +98,9 @@ user_id, artist_id, track_id, album_id
 
 User_id, Artist_id, counts
 
+## STATUS
+
+name, slug
 ***Note: You can add,remove and update the models***
 
 > #### *Stephen*
