@@ -12,8 +12,14 @@ use Spatie\Sluggable\SlugOptions;
 class Category extends Model implements hasMedia
 {
     use HasFactory, HasSlug, InteractsWithMedia;
-
     public $fillable = ['name', 'slug'];
+
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('category');
+    }
+
 
     /**
      * Get the options for generating the slug.

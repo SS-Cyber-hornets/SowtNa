@@ -27,14 +27,17 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->all());
-        $category = Category::find($request->id);
-        $category
-            ->addMedia('public/images/category')
-            ->toMediaCollection();
-        return $category;
-    }
+        $input = $request->all();
 
+        $category = Category::create($input);
+        $category = Category::find($category->id);
+
+        // Get image file  
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $category->addMediaFromRequest('image')->toMediaCollection('category');
+        }
+        return response()->json(['status' => 200, 'data' => $category]);
+    }
     /**
      * Display the specified resource.
      *
