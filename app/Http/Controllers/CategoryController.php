@@ -45,9 +45,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show(Category $category)
+
     {
-        return $category;
+        return $category->getFirstMedia('category')->getUrl('cover');
     }
 
     /**

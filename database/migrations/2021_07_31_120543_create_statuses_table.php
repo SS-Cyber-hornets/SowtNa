@@ -16,7 +16,6 @@ class CreateStatusesTable extends Migration
             $table->timestamps();
         });
     }
-
     public function down()
     {
         Schema::dropIfExists('statuses');
