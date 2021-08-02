@@ -27,6 +27,9 @@ Route::prefix('v1/')->group(function () {
 
     // AUTH ROUTES
     Route::group(['middleware' => ['auth:sanctum']], function () {
+
+        // LOGOUT ROUTE
+        Route::post('/logout', [AuthController::class, 'logout']);
         // GENDER ROUTES
         Route::post('/genders', [GenderController::class, 'store']);
         Route::put('/gender/{gender}', [GenderController::class, 'update']);

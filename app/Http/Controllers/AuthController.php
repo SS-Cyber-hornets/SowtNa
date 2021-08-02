@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+
 
 class AuthController extends Controller
 {
@@ -19,23 +21,39 @@ class AuthController extends Controller
             'user' => $user,
         ]);
     }
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
 
-        // //Check email
-        // $user = User::where('email', $request->email)->first();
-        // //Check Password
-        // if (!$user || !Hash::check($request->password, $user->password)) {
-        //     return response([
-        //         'message' => 'Invalid Credentials'
-        //     ], 401);
-        // }
-        // $token = $user->createToken('myapptoken')->plainTextToken;
-        // $response = [
-        //     'user' => $user,
-        //     'token' => $token
-        // ];
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
 
-        // return response($response, 201);
+        ]);
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => 'Invalid Credentials'
+            ], 401);
+        }
+
+        $token = $user->createToken('myapptoken')->plainTextToken;
+
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+
+        return response($response, 201);
+
+    // LOGOUT METHODE
+
+    public function logout(Request $request)
+    {
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => 'Logged out'
+        ];
     }
 }
