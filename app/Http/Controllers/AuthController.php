@@ -45,7 +45,7 @@ class AuthController extends Controller
         ];
 
         return response($response, 201);
-
+    }
     // LOGOUT METHODE
 
     public function logout(Request $request)
