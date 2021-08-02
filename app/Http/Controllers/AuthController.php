@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -24,34 +25,24 @@ class AuthController extends Controller
     public function login(Request $request)
     {
 
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-
-        ]);
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response([
-                'message' => 'Invalid Credentials'
-            ], 401);
+        $user = User::where('email', $request->email)->where('password', $request->password)->first();
+        if ($user) {
+            $token = $user->createToken('myapptoken')->plainTextToken;
+            return response()->json([
+                'token' => $token,
+                'user' => $user,
+            ]);
+        } else {
+            return response()->json(['error' => 'Unauthorised'], 401);
         }
-
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response($response, 201);
     }
+
     // LOGOUT METHODE
 
     public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
 
+        auth()->user()->tokens()->delete();
         return [
             'message' => 'Logged out'
         ];
