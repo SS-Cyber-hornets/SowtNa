@@ -18,11 +18,23 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'fname',
+        'lname',
         'email',
         'password',
+        'bio',
+        'phone',
+        'gender_id',
+
     ];
 
+
+    // RELATIONSHIP
+
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
