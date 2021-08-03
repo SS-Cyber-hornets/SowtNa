@@ -28,6 +28,11 @@ Route::prefix('v1/')->group(function () {
     // AUTH ROUTES
     Route::group(['middleware' => ['auth:sanctum']], function () {
 
+
+        // USER ROUTES
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
         // LOGOUT ROUTE
         Route::post('/logout', [AuthController::class, 'logout']);
         // GENDER ROUTES
@@ -65,6 +70,3 @@ Route::prefix('v1/')->group(function () {
         Route::delete('/year/{year}', [YearController::class, 'destroy']);
     });
 });
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
