@@ -29,20 +29,14 @@ Route::prefix('v1/')->group(function () {
     // AUTH ROUTES
     Route::group(['middleware' => ['auth:sanctum']], function () {
 
-
         // USER PROFILE ROUTES
         Route::get('/user', [ProfileController::class, 'index']);
-        Route::get('/user', [ProfileController::class, 'update']);
+        Route::put('/user/{user}', [ProfileController::class, 'update']);
+
         // LOGOUT ROUTE
         Route::post('/logout', [AuthController::class, 'logout']);
-        // GENDER ROUTES
-        Route::post('/genders', [GenderController::class, 'store']);
-        Route::put('/gender/{gender}', [GenderController::class, 'update']);
-        Route::get('/gender/{gender}', [GenderController::class, 'show']);
-        Route::delete('/gender/{gender}', [GenderController::class, 'destroy']);
 
-        // USER ROUTES
-        Route::get('/genders', [GenderController::class, 'index']);
+        // GENDER ROUTES
         Route::post('/genders', [GenderController::class, 'store']);
         Route::put('/gender/{gender}', [GenderController::class, 'update']);
         Route::get('/gender/{gender}', [GenderController::class, 'show']);

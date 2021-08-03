@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\Gender;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -48,9 +51,18 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        if ($request->user()->token) {
+            return response()->json(['Message' => "You are not authenticated"]);
+        }
 
+        $user = User::find($id);
+        $gender = Gender::get();
+        $user->update($request->all());
+        return response()->json([
+            $user,
+            $gender,
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *

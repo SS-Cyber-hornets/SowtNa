@@ -16,8 +16,6 @@ class Category extends Model implements hasMedia
     use HasFactory, HasSlug, InteractsWithMedia, HasStatuses;
     public $fillable = ['name', 'slug'];
 
-
-
     public function registerMediaCollections(Media $media = null): void
     {
         $this->addMediaConversion('cover')

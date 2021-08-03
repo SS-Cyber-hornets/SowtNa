@@ -6,6 +6,7 @@ use App\Http\Requests\GenderRequest;
 use App\Http\Resources\GenderCollection;
 use App\Http\Resources\GenderResource;
 use App\Models\Gender;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -48,11 +49,15 @@ class GenderController extends Controller
      */
     public function update(GenderRequest $request, $id)
     {
+        if (!$request->use()->token) {
+            return response()->json(['
+           message' => 'This is not your accout']);
+        }
+        $user = User::find($request->id);
         $gender = Gender::find($id);
         $gender->update($request->all());
         return response()->json($gender, 201);
     }
-
     /**
      * Remove the specified resource from storage.
      *
