@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GenderController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,9 @@ Route::prefix('v1/')->group(function () {
     Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
-        // USER ROUTES
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
+        // USER PROFILE ROUTES
+        Route::get('/user', [ProfileController::class, 'index']);
+        Route::get('/user', [ProfileController::class, 'update']);
         // LOGOUT ROUTE
         Route::post('/logout', [AuthController::class, 'logout']);
         // GENDER ROUTES
