@@ -27,6 +27,9 @@ class ProfileController extends Controller
         }
         $user = User::find($id);
         $gender = Gender::get();
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $user->addMediaFromRequest('image')->toMediaCollection('user');
+        }
         $user->update($request->all());
         return response()->json([
             "user" => $user,
