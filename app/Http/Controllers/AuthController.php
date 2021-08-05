@@ -19,7 +19,7 @@ class AuthController extends Controller
         return response()->json([
             'token' => $token,
             'user' => $user,
-            'message' => "You are successfully created, here is your {$user->email}"
+            'message' => "You are account is successfully created, here is your email: {$user->email}"
         ]);
     }
     public function login(LoginRequest $request)

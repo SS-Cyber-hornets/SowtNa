@@ -20,47 +20,17 @@ class ProfileController extends Controller
         return $request->user();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         if ($request->user()->token) {
             return response()->json(['Message' => "You are not authenticated"]);
         }
-
         $user = User::find($id);
         $gender = Gender::get();
         $user->update($request->all());
         return response()->json([
-            $user,
-            $gender,
+            "user" => $user,
+            "message" => "user info updated successfully",
         ]);
     }
     /**
@@ -69,8 +39,11 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request  $request)
     {
-        //
+        return response()->json([
+            User::destroy($id),
+            'message' => "User deleted"
+        ]);
     }
 }

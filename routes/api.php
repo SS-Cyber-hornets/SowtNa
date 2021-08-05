@@ -32,10 +32,9 @@ Route::prefix('v1/')->group(function () {
         // USER PROFILE ROUTES
         Route::get('/user', [ProfileController::class, 'index']);
         Route::put('/user/{user}', [ProfileController::class, 'update']);
-
+        Route::delete('/user/{user}', [ProfileController::class, 'destroy']);
         // LOGOUT ROUTE
         Route::post('/logout', [AuthController::class, 'logout']);
-
         // GENDER ROUTES
         Route::post('/genders', [GenderController::class, 'store']);
         Route::put('/gender/{gender}', [GenderController::class, 'update']);
