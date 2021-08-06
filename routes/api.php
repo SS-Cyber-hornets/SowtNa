@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GenderController;
 use App\Http\Controllers\YearController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -61,5 +62,12 @@ Route::prefix('v1/')->group(function () {
         Route::put('/year/{year}', [YearController::class, 'update']);
         Route::get('/year/{year}', [YearController::class, 'show']);
         Route::delete('/year/{year}', [YearController::class, 'destroy']);
+
+        // GROUP ROUTES
+        Route::get('/groups', [GroupController::class, 'index']);
+        Route::post('/groups', [GroupController::class, 'store']);
+        Route::put('/group/{group}', [GroupController::class, 'update']);
+        Route::get('/group/{group}', [GroupController::class, 'show']);
+        Route::delete('/group/{group}', [GroupController::class, 'destroy']);
     });
 });
