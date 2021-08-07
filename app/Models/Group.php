@@ -14,8 +14,6 @@ class Group extends Model implements HasMedia
 {
     use HasFactory, HasSlug, InteractsWithMedia;
 
-
-
     public function registerMediaCollections(Media $media = null): void
     {
         $this->addMediaConversion('cover')

@@ -74,6 +74,10 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        return Group::destroy($id);
+        $group = Group::destroy($id);
+        return response()->json([
+            'status' => '200',
+            'message' => " Group is successfully destroyed",
+        ]);
     }
 }
