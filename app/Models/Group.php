@@ -4,13 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Sluggable\HasSlug;
 
-class Group extends Model
+class Group extends Model implements HasMedia
 {
-    use HasFactory, HasSlug;
-    public $fillable = ['name', 'slug', 'bio', 'year_id'];
+    use HasFactory, HasSlug, InteractsWithMedia;
+
+
+
+    public function registerMediaCollections(Media $media = null): void
+    {
+        $this->addMediaConversion('cover')
+            ->width(990)
+            ->height(370);
+    }
+
+    public $fillable = ['name', 'slug', 'description', 'bio', 'year_id'];
     /**
      * Get the options for generating the slug.
      */
