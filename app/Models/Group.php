@@ -20,7 +20,6 @@ class Group extends Model implements HasMedia
             ->width(990)
             ->height(370);
     }
-
     public $fillable = ['name', 'slug', 'description', 'bio', 'year_id'];
     /**
      * Get the options for generating the slug.
