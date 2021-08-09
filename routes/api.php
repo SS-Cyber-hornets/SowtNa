@@ -8,6 +8,7 @@ use App\Http\Controllers\YearController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,22 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
+
+
+
 Route::prefix('v1/')->group(function () {
     //PUBLIC ROUTES
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/genders', [GenderController::class, 'index']);
+
+
+    // LABEL ROUTES
+    Route::get('/labels', [LableController::class, 'index']);
+    Route::post('/labels', [LableController::class, 'store']);
+    Route::put('/label/{label}', [LableController::class, 'update']);
+    Route::get('/label/{label}', [LableController::class, 'show']);
+    Route::delete('/label/{label}', [LableController::class, 'destroy']);
 
     // AUTH ROUTES
     Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -35,6 +47,7 @@ Route::prefix('v1/')->group(function () {
         Route::delete('/user/{user}', [ProfileController::class, 'destroy']);
         // LOGOUT ROUTE
         Route::post('/logout', [AuthController::class, 'logout']);
+
         // GENDER ROUTES
         Route::post('/genders', [GenderController::class, 'store']);
         Route::put('/gender/{gender}', [GenderController::class, 'update']);

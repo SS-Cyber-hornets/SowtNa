@@ -20,7 +20,7 @@ class Label extends Model implements HasMedia
             ->width(990)
             ->height(370);
     }
-    public $fillable = ['name', 'slug', 'description', 'group_id', 'year_id'];
+    public $fillable = ['name', 'slug', 'description', 'year_id'];
     /**
      * Get the options for generating the slug.
      */

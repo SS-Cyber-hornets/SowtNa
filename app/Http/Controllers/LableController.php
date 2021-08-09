@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LableRequest;
+use App\Http\Resources\LableCollection;
+use App\Models\Label;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class LableController extends Controller
 {
@@ -13,29 +17,42 @@ class LableController extends Controller
      */
     public function index()
     {
-        //
+        return new LableCollection(Label::paginate());
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LableRequest $request)
     {
-        //
-    }
+        $input = $request->all();
 
+        $label = Label::create($input);
+        // $group->setStatus('active');
+
+        $label = Label::find($label->id);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $label->addMediaFromRequest('image')->toMediaCollection('label');
+        }
+        return response()->json([
+            'status' => 200,
+            'data' => $label,
+            'message' => 'Label created successfully'
+        ]);
+    }
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show(Label $label)
+
     {
-        //
+        return $label->getFirstMedia('label')->getUrl('cover');
     }
 
     /**
@@ -45,9 +62,14 @@ class LableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LableRequest $request, $id)
     {
-        //
+        $label = Label::find($id);
+        $label->update($request->all());
+        return response()->json([
+            'label' => $label,
+            'message' => 'Label updated successfully'
+        ]);
     }
 
     /**
@@ -58,6 +80,10 @@ class LableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $group = Label::destroy($id);
+        return response()->json([
+            'status' => '200',
+            'message' => " Label is successfully destroyed",
+        ]);
     }
 }
