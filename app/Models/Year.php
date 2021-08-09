@@ -13,6 +13,7 @@ class Year extends Model
 
     public $fillable = ['year', 'slug'];
 
+
     /**
      * Get the options for generating the slug.
      */

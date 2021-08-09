@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChartTypeController;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,9 @@ Route::prefix('v1/')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/genders', [GenderController::class, 'index']);
-
+    // YEAR ROUTES
+    Route::get('/years', [YearController::class, 'index']);
+    Route::post('/years', [YearController::class, 'store']);
 
     // LABEL ROUTES
     Route::get('/labels', [LabelController::class, 'index']);
@@ -37,6 +40,13 @@ Route::prefix('v1/')->group(function () {
     Route::put('/label/{label}', [LabelController::class, 'update']);
     Route::get('/label/{label}', [LabelController::class, 'show']);
     Route::delete('/label/{label}', [LabelController::class, 'destroy']);
+
+    // ALBUMS ROUTES
+    Route::get('/albums', [AlbumController::class, 'index']);
+    Route::post('/albums', [AlbumController::class, 'store']);
+    Route::put('/album/{album}', [AlbumController::class, 'update']);
+    Route::get('/album/{album}', [AlbumController::class, 'show']);
+    Route::delete('/album/{album}', [AlbumController::class, 'destroy']);
 
     // AUTH ROUTES
     Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -68,9 +78,7 @@ Route::prefix('v1/')->group(function () {
         Route::get('/genre/{category}', [CategoryController::class, 'show']);
         Route::delete('/genre/{category}', [CategoryController::class, 'destroy']);
 
-        // YEAR ROUTES
-        Route::get('/years', [YearController::class, 'index']);
-        Route::post('/years', [YearController::class, 'store']);
+
         Route::put('/year/{year}', [YearController::class, 'update']);
         Route::get('/year/{year}', [YearController::class, 'show']);
         Route::delete('/year/{year}', [YearController::class, 'destroy']);
