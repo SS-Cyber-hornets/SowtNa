@@ -8,7 +8,7 @@ use App\Http\Controllers\YearController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\LableController;
+use App\Http\Controllers\LabelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +32,11 @@ Route::prefix('v1/')->group(function () {
 
 
     // LABEL ROUTES
-    Route::get('/labels', [LableController::class, 'index']);
-    Route::post('/labels', [LableController::class, 'store']);
-    Route::put('/label/{label}', [LableController::class, 'update']);
-    Route::get('/label/{label}', [LableController::class, 'show']);
-    Route::delete('/label/{label}', [LableController::class, 'destroy']);
+    Route::get('/labels', [LabelController::class, 'index']);
+    Route::post('/labels', [LabelController::class, 'store']);
+    Route::put('/label/{label}', [LabelController::class, 'update']);
+    Route::get('/label/{label}', [LabelController::class, 'show']);
+    Route::delete('/label/{label}', [LabelController::class, 'destroy']);
 
     // AUTH ROUTES
     Route::group(['middleware' => ['auth:sanctum']], function () {

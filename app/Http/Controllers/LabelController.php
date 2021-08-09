@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LableRequest;
-use App\Http\Resources\LableCollection;
+use App\Http\Requests\LabelRequest;
+use App\Http\Resources\LabelCollection;
 use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class LableController extends Controller
+class LabelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class LableController extends Controller
      */
     public function index()
     {
-        return new LableCollection(Label::paginate());
+        return new LabelCollection(Label::paginate());
     }
     /**
      * Store a newly created resource in storage.
@@ -25,7 +25,7 @@ class LableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LableRequest $request)
+    public function store(LabelRequest $request)
     {
         $input = $request->all();
 
@@ -62,7 +62,7 @@ class LableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(LableRequest $request, $id)
+    public function update(LabelRequest $request, $id)
     {
         $label = Label::find($id);
         $label->update($request->all());
