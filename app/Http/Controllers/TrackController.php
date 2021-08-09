@@ -2,40 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TrackRequest;
+use App\Http\Resources\TrackCollection;
+use App\Models\Track;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class TrackController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Respons
      */
     public function index()
     {
-        //
+        return new TrackCollection(Track::paginate());
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TrackRequest $request)
     {
-        //
+        $input = $request->all();
+        // $years = Year::get('year', 'id');
+        $track = Track::create($input);
+        // $group->setStatus('active');
+        $track = Track::find($track->id);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $track->addMediaFromRequest('image')->toMediaCollection('track-cover');
+        }
+        if ($request->hasFile('source') && $request->file('source')->isValid()) {
+            $track->addMediaFromRequest('source')->toMediaCollection('source');
+        }
+        return response()->json([
+            'status' => 200,
+            'track' => $track,
+            'message' => 'track uploaded successfully'
+        ]);
     }
-
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show(Track $track)
+
     {
-        //
+        return $track->getFirstMediaPath();
     }
 
     /**
@@ -45,9 +64,14 @@ class TrackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TrackRequest $request, $id)
     {
-        //
+        $track = Track::find($id);
+        $track->update($request->all());
+        return response()->json([
+            'label' => $track,
+            'message' => 'Update updated successfully'
+        ]);
     }
 
     /**
@@ -58,6 +82,11 @@ class TrackController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $track = Track::destroy($id);
+        return response()->json([
+            'status' => '200',
+            'message' => " Album is successfully destroyed",
+            'track' => $track
+        ]);
     }
 }

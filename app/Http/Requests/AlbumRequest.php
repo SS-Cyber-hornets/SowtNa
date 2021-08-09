@@ -24,7 +24,7 @@ class AlbumRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|unique:labels',
+            'name' => 'required|min:2',
             'description' => 'required',
             'duration' => 'required',
             'year_id' => 'required'

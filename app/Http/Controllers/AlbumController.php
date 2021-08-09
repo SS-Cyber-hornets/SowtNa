@@ -29,7 +29,7 @@ class AlbumController extends Controller
     public function store(AlbumRequest $request)
     {
         $input = $request->all();
-        $years = Year::get('year', 'id');
+        // $years = Year::get('year', 'id');
         $album = Album::create($input);
         // $group->setStatus('active');
         $album = Album::find($album->id);

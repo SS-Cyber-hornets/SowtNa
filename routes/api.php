@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LabelController;
+use App\Http\Controllers\TrackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,6 @@ Route::prefix('v1/')->group(function () {
     // YEAR ROUTES
     Route::get('/years', [YearController::class, 'index']);
     Route::post('/years', [YearController::class, 'store']);
-
     // LABEL ROUTES
     Route::get('/labels', [LabelController::class, 'index']);
     Route::post('/labels', [LabelController::class, 'store']);
@@ -47,6 +47,13 @@ Route::prefix('v1/')->group(function () {
     Route::put('/album/{album}', [AlbumController::class, 'update']);
     Route::get('/album/{album}', [AlbumController::class, 'show']);
     Route::delete('/album/{album}', [AlbumController::class, 'destroy']);
+
+    // TRACKS ROUTES
+    Route::get('/tracks', [TrackController::class, 'index']);
+    Route::post('/tracks', [TrackController::class, 'store']);
+    Route::put('/track/{track}', [TrackController::class, 'update']);
+    Route::get('/track/{track}', [TrackController::class, 'show']);
+    Route::delete('/track/{track}', [TrackController::class, 'destroy']);
 
     // AUTH ROUTES
     Route::group(['middleware' => ['auth:sanctum']], function () {
