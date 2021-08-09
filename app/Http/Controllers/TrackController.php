@@ -33,11 +33,13 @@ class TrackController extends Controller
         // $group->setStatus('active');
         $track = Track::find($track->id);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $track->addMediaFromRequest('image')->toMediaCollection('track-cover');
+            $track->addMediaFromRequest('image');
         }
-        if ($request->hasFile('source') && $request->file('source')->isValid()) {
-            $track->addMediaFromRequest('source')->toMediaCollection('source');
+
+        if ($request->hasFile('audio') && $request->file('audio')->isValid()) {
+            $track->addMediaFromRequest('audio');
         }
+
         return response()->json([
             'status' => 200,
             'track' => $track,
@@ -54,9 +56,10 @@ class TrackController extends Controller
     public function show(Track $track)
 
     {
-        return $track->getFirstMediaPath();
+        return response()->json([
+            'track' => $track
+        ]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -73,7 +76,6 @@ class TrackController extends Controller
             'message' => 'Update updated successfully'
         ]);
     }
-
     /**
      * Remove the specified resource from storage.
      *

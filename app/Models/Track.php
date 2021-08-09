@@ -21,12 +21,11 @@ class Track extends Model implements HasMedia
             ->addMediaConversion('cover')
             ->width(990)
             ->height(370);
-
-
-        $this->addMediaCollection('source')
-            ->acceptsFile(function (File $file) {
-                return $file->mimeType === ['audio/mp3'];
-            });
+        $this
+            ->addMediaCollection('source')
+            ->accepts('audio/*')
+            ->maxFileSize(50 * 1000 * 1000)
+            ->singleFile();
     }
 
     // Model RELATIONSHIP
