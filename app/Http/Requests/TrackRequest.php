@@ -26,7 +26,8 @@ class TrackRequest extends FormRequest
         return [
             'name' => 'required|min:2',
             'duration' => 'required',
-            'year_id' => 'required'
+            'year_id' => 'required',
+            // 'source' => 'required|mimes:audio/mpeg'
         ];
     }
 }

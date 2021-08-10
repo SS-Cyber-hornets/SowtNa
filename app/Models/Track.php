@@ -17,15 +17,8 @@ class Track extends Model implements HasMedia
     public $fillable = ['name', 'duration', 'year_id'];
     public function registerMediaCollections(Media $media = null): void
     {
-        $this
-            ->addMediaConversion('cover')
-            ->width(990)
-            ->height(370);
-        $this
-            ->addMediaCollection('source')
-            ->accepts('audio/*')
-            ->maxFileSize(50 * 1000 * 1000)
-            ->singleFile();
+        $this->addMediaCollection('images');
+        $this->addMediaCollection('tracks');
     }
 
     // Model RELATIONSHIP
