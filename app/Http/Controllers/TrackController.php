@@ -32,12 +32,12 @@ class TrackController extends Controller
         $track = Track::create($input);
         // $group->setStatus('active');
         $track = Track::find($track->id);
-
-
-        // Media uploads
-        $track->addMedia($request->image)->toMediaCollection('images');
-        $track->addMedia($request->source)->toMediaCollection('tracks');
-
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $track->addMediaFromRequest('image')->toMediaCollection('track');
+        }
+        if ($request->hasFile('source') && $request->file('source')->isValid()) {
+            $track->addMediaFromRequest('source')->toMediaCollection('track_files');
+        }
         return response()->json([
             'status' => 200,
             'track' => $track,

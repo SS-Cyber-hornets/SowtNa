@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+// use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\MediaLibrary\MediaCollections\File;
@@ -15,10 +15,10 @@ class Track extends Model implements HasMedia
 {
     use HasFactory, HasSlug, InteractsWithMedia;
     public $fillable = ['name', 'duration', 'year_id'];
-    public function registerMediaCollections(Media $media = null): void
+    public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('images');
         $this->addMediaCollection('tracks');
+        $this->addMediaCollection('track_files');
     }
 
     // Model RELATIONSHIP
