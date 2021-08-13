@@ -15,6 +15,7 @@ class AuthController extends Controller
     public function register(AuthRequest $request)
     {
         $user = User::create($request->all());
+        $user->
         $token = $user->createToken('myapptoken')->plainTextToken;
         return response()->json([
             'token' => $token,
