@@ -23,6 +23,12 @@ class Category extends Model implements hasMedia
             ->height(370);
     }
 
+    // Model RELATIONSHIP
+
+    public function tracks()
+    {
+        return $this->hasMany(Track::class);
+    }
     /**
      * Get the options for generating the slug.
      */

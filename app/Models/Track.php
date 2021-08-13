@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\File;
 class Track extends Model implements HasMedia
 {
     use HasFactory, HasSlug, InteractsWithMedia;
-    public $fillable = ['name', 'duration', 'year_id'];
+    public $fillable = ['name', 'duration', 'year_id', 'category_id', 'group_id', 'label_id'];
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('tracks');
@@ -22,12 +22,17 @@ class Track extends Model implements HasMedia
     }
 
     // Model RELATIONSHIP
-    /**
-     * Get all of the post's comments.
-     */
+
     public function year()
     {
         return $this->belongsTo(Year::class);
+    }
+
+    // Model RELATIONSHIP
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
     /**
      * Get the options for generating the slug.

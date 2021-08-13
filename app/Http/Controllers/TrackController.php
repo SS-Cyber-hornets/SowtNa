@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TrackRequest;
 use App\Http\Resources\TrackCollection;
+use App\Models\Category;
 use App\Models\Track;
+use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -28,7 +30,8 @@ class TrackController extends Controller
     public function store(TrackRequest $request)
     {
         $input = $request->all();
-        // $years = Year::get('year', 'id');
+        $years = Year::get('year', 'id');
+        $categories = Category::get('name', 'id');
         $track = Track::create($input);
         // $group->setStatus('active');
         $track = Track::find($track->id);
@@ -41,6 +44,7 @@ class TrackController extends Controller
         return response()->json([
             'status' => 200,
             'track' => $track,
+            'categories' => $categories,
             'message' => 'track uploaded successfully'
         ]);
     }
