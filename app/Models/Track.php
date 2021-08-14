@@ -34,6 +34,10 @@ class Track extends Model implements HasMedia
     {
         return $this->belongsTo(Category::class);
     }
+    public function album()
+    {
+        return $this->belongsTo(Album::class);
+    }
     /**
      * Get the options for generating the slug.
      */

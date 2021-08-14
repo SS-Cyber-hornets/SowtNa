@@ -7,16 +7,30 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Multicaret\Acquaintances\Traits\CanBeFollowed;
+use Multicaret\Acquaintances\Traits\CanFollow;
+use Multicaret\Acquaintances\Traits\CanLike;
+use Multicaret\Acquaintances\Traits\Friendable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Overtrue\LaravelLike\Traits\Liker;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, HasSlug, InteractsWithMedia, HasRoles;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasSlug,
+        InteractsWithMedia,
+        HasRoles,
+        Friendable,
+        CanFollow,
+        CanBeFollowed,
+        CanLike;
 
     /**
      * The attributes that are mass assignable.
@@ -24,8 +38,7 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'fname',
-        'lname',
+        'username',
         'email',
         'password',
         'bio',
@@ -71,7 +84,7 @@ class User extends Authenticatable implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom(['fname', 'lname'])
+            ->generateSlugsFrom(['username'])
             ->saveSlugsTo('slug');
     }
     /**

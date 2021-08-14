@@ -29,6 +29,10 @@ class Album extends Model implements HasMedia
     {
         return $this->belongsTo(Year::class);
     }
+    public function tracks()
+    {
+        return $this->hasMany(Track::class);
+    }
 
 
     /**
