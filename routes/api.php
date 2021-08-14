@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LabelController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\TrackController;
 
 /*
@@ -84,6 +85,13 @@ Route::prefix('v1/')->group(function () {
     Route::put('/genre/{category}', [CategoryController::class, 'update']);
     Route::get('/genre/{category}', [CategoryController::class, 'show']);
     Route::delete('/genre/{category}', [CategoryController::class, 'destroy']);
+
+    // TAGS ROUTES
+    Route::get('/tags', [TagController::class, 'index']);
+    Route::post('/tags', [TagController::class, 'store']);
+    Route::put('/tag/{tag}', [TagController::class, 'update']);
+    Route::get('/tag/{tag}', [TagController::class, 'show']);
+    Route::delete('/tag/{tag}', [TagController::class, 'destroy']);
 
 
     Route::put('/year/{year}', [YearController::class, 'update']);

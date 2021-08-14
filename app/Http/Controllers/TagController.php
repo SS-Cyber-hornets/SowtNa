@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TagCollection;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Spatie\Tags\Tag as TagsTag;
 
 class TagController extends Controller
 {
@@ -14,9 +17,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return Tag::paginate();
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -25,40 +27,46 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $tag = TagsTag::create($input);
+        return response()->json(['status' => 200, 'data' => $tag]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+
+    public function show(TagsTag $tag)
+
     {
-        //
+        return $tag;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, $id)
     {
-        //
+        $tag = TagsTag::find($id);
+        $tag->update($request->all());
+        return $tag;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        //
+        return TagsTag::destroy($id);
     }
 }
