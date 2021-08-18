@@ -38,6 +38,10 @@ class Track extends Model implements HasMedia
     {
         return $this->belongsTo(Album::class);
     }
+    public function playlists()
+    {
+        return $this->belongsToMany(Playlist::class, 'track_playlist');
+    }
     /**
      * Get the options for generating the slug.
      */
