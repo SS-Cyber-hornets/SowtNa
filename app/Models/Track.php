@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\File;
 class Track extends Model implements HasMedia
 {
     use HasFactory, HasSlug, InteractsWithMedia;
-    public $fillable = ['name', 'duration', 'year_id', 'category_id', 'group_id', 'label_id'];
+    public $fillable = ['name', 'description', 'year_id', 'user_id', 'category_id', 'group_id', 'label_id'];
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('tracks');

@@ -26,8 +26,6 @@ class PlaylistRequest extends FormRequest
         return [
             'name' => 'required|min:2|unique:categories',
             'description' => 'required',
-            'track_id' => 'required',
-            'user_id' => 'required'
         ];
     }
 }

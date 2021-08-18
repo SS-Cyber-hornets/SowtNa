@@ -29,10 +29,17 @@ class TrackController extends Controller
      */
     public function store(TrackRequest $request)
     {
-        $input = $request->all();
+        // $input = $request->all();
+        $track = Track::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'user_id' => $request->user()->id,
+            'category_id' => $request->category_id,
+            'year_id' => $request->year_id,
+        ]);
         $years = Year::get('year', 'id');
         $categories = Category::get('name', 'id');
-        $track = Track::create($input);
+        // $track = Track::create($input);
         // $group->setStatus('active');
         $track = Track::find($track->id);
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -45,6 +52,7 @@ class TrackController extends Controller
             'status' => 200,
             'track' => $track,
             'categories' => $categories,
+            'years' => $years,
             'message' => 'track uploaded successfully'
         ]);
     }

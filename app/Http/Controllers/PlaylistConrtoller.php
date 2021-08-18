@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PlaylistRequest;
+use App\Http\Resources\PlaylistCollection;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class PlaylistConrtoller extends Controller
 {
@@ -13,7 +17,7 @@ class PlaylistConrtoller extends Controller
      */
     public function index()
     {
-        //
+        return new PlaylistCollection(Playlist::paginate());
     }
 
     /**
@@ -22,9 +26,20 @@ class PlaylistConrtoller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlaylistRequest $request)
     {
-        //
+        $playlist = Playlist::create([
+            'name' => $request['name'],
+            'description' => $request['description'],
+            'user_id' => $request->user()->id,
+            'image' => $request->image
+        ]);
+        // $playlist->setStatus('active');
+        $playlist = Playlist::find($playlist->id);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $playlist->addMediaFromRequest('image')->toMediaCollection('playlist_cover');
+        }
+        return response()->json(['status' => 200, 'data' => $playlist]);
     }
 
     /**

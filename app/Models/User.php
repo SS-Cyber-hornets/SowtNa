@@ -46,7 +46,10 @@ class User extends Authenticatable implements HasMedia
         'gender_id',
     ];
     // RELATIONSHIP
-
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
     public function gender()
     {
         return $this->belongsTo(Gender::class);

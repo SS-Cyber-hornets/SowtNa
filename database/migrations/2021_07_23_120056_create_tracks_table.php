@@ -17,8 +17,9 @@ class CreateTracksTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            // $table->string('cover');
-            $table->string('duration');
+            $table->string('description');
+            // // $table->string('cover');
+            // $table->string('duration');
             $table->timestamps();
         });
     }

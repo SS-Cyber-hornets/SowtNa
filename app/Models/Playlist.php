@@ -19,6 +19,11 @@ class Playlist extends Model implements HasMedia
         $this->addMediaCollection('playlist_cover');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function tracks()
     {
         return $this->belongsToMany(Track::class, 'track_playlist');
