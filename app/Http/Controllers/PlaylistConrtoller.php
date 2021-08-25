@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PlaylistRequest;
 use App\Http\Resources\PlaylistCollection;
 use App\Models\Playlist;
+use App\Models\Track;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -42,15 +43,22 @@ class PlaylistConrtoller extends Controller
         return response()->json(['status' => 200, 'data' => $playlist]);
     }
 
+    public function add_to_playlist(Request $request, Playlist $playlist, Track $track)
+    {
+        $playlist = Playlist::find($playlist->id);
+        $track = Track::find($track->id);
+        $playlist->playlist()->attach($track);
+    }
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Playlist $playlist)
     {
-        //
+        return $playlist;
     }
 
     /**

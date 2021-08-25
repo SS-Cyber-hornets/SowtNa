@@ -101,9 +101,11 @@ Route::prefix('v1/')->group(function () {
         Route::put('/year/{year}', [YearController::class, 'update']);
         Route::get('/year/{year}', [YearController::class, 'show']);
         Route::delete('/year/{year}', [YearController::class, 'destroy']);
+
         // PLAYLISTS ROUTES
         Route::get('/playlists', [PlaylistConrtoller::class, 'index']);
         Route::post('/playlists', [PlaylistConrtoller::class, 'store']);
+        Route::post('/add_to_playlist', [PlaylistConrtoller::class, 'add_to_playlist']);
         Route::put('/playlist/{playlist}', [PlaylistConrtoller::class, 'update']);
         Route::get('/playlist/{playlist}', [PlaylistConrtoller::class, 'show']);
         Route::delete('/playlist/{playlist}', [PlaylistConrtoller::class, 'destroy']);
